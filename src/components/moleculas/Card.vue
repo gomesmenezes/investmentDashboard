@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Eye, EyeOff, CircleEllipsis } from 'lucide-vue-next';
+import { Button } from 'primevue';
 
 const showMoney = ref(true);
 const toggleMoney = () => {
@@ -34,7 +35,7 @@ const valuePorcentage = ref(0);
         </div>
         <div
           class="rounded-md px-2 bg-[#1a9e30a1]"
-          :class="valuePorcentage <= 0 ? 'bg-red-500' : 'bg-green-500'"
+          :class="valuePorcentage < 0 ? 'bg-red-500' : 'bg-green-500'"
         >
           {{ valuePorcentage }}%
         </div>
