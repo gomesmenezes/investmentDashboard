@@ -1,4 +1,9 @@
 {
-    "explorer.compactFolders": false,
-    "editor.fontSize": 16
+  "explorer.compactFolders": false,
+  "editor.fontSize": 16,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
 }
