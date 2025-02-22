@@ -2,6 +2,13 @@
 import { Eye, EyeOff, CircleEllipsis } from 'lucide-vue-next';
 import { Button } from 'primevue';
 
+defineProps({
+  totalValue: {
+    type: Number,
+    required: true,
+  },
+});
+
 const showMoney = ref(true);
 const toggleMoney = () => {
   showMoney.value = !showMoney.value;
@@ -10,8 +17,8 @@ const valuePorcentage = ref(0);
 </script>
 
 <template>
-  <div class="card bg-[#0B1739] px-8 py-5 rounded-2xl mt-[28px]">
-    <div class="flex gap-10 items-center mb-5">
+  <div class="card bg-[#0B1739] px-8 py-5 rounded-2xl mt-[28px] max-w-[350px]">
+    <div class="flex gap-10 items-center mb-5 justify-between">
       <div class="flex gap-2 items-center">
         <div v-if="showMoney">
           <Eye @click="toggleMoney" />
@@ -28,7 +35,7 @@ const valuePorcentage = ref(0);
     <div>
       <div class="flex gap-3 items-center">
         <div v-if="showMoney" class="value">
-          <p class="font-bold text-lg">R$12.973.460.00</p>
+          <p class="font-bold text-lg">R$ {{ totalValue }}</p>
         </div>
         <div v-else>
           <p class="font-bold text-lg">R$******</p>

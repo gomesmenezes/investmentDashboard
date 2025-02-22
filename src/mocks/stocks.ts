@@ -1,0 +1,58 @@
+import { Stock } from '@/types/stock';
+
+export const mockStocks: Stock[] = [
+  {
+    id: 1,
+    stockName: 'Apple',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
+    stockQuantity: 10,
+    stockPriceBuy: 100,
+    stockPriceCurrent: 200,
+    stockValuation: 15,
+  },
+  {
+    id: 2,
+    stockName: 'Microsoft',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+    stockQuantity: 15,
+    stockPriceBuy: 150,
+    stockPriceCurrent: 250,
+    stockValuation: 20,
+  },
+  {
+    id: 3,
+    stockName: 'Google',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
+    stockQuantity: 8,
+    stockPriceBuy: 1200,
+    stockPriceCurrent: 1500,
+    stockValuation: 12.5,
+  },
+  {
+    id: 4,
+    stockName: 'Amazon',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
+    stockQuantity: 5,
+    stockPriceBuy: 1700,
+    stockPriceCurrent: 1900,
+    stockValuation: 11.8,
+  },
+  {
+    id: 5,
+    stockName: 'Tesla',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg',
+    stockQuantity: 12,
+    stockPriceBuy: 600,
+    stockPriceCurrent: 900,
+    stockValuation: 30,
+  },
+  {
+    id: 6,
+    stockName: 'Nvidia',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg',
+    stockQuantity: 20,
+    stockPriceBuy: 500,
+    stockPriceCurrent: 750,
+    stockValuation: 25,
+  },
+];
