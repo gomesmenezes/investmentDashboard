@@ -9,7 +9,7 @@ defineProps({
   },
 });
 
-const showMoney = ref(true);
+const showMoney = ref(false);
 const toggleMoney = () => {
   showMoney.value = !showMoney.value;
 };
@@ -35,7 +35,7 @@ const valuePorcentage = ref(0);
     <div>
       <div class="flex gap-3 items-center">
         <div v-if="showMoney" class="value">
-          <p class="font-bold text-lg">R$ {{ totalValue }}</p>
+          <p class="font-bold text-lg">R$ {{ totalValue.toFixed(2) }}</p>
         </div>
         <div v-else>
           <p class="font-bold text-lg">R$******</p>

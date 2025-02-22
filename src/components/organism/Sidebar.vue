@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { House, Wallet, LogOut } from 'lucide-vue-next';
+import { House, Wallet, LogOut, Handshake } from 'lucide-vue-next';
 import { onMounted } from 'vue';
 const route = useRoute();
 
@@ -56,17 +56,33 @@ onMounted(() => {
             </div>
           </nuxt-link>
         </li>
+
+        <li class="flex rounded-lg">
+          <nuxt-link to="/dashboard/agentInvestment" class="flex justify-center items-center gap-2">
+            <div
+              class="p-2 rounded-lg"
+              :class="route.path === '/dashboard/agentInvestment' ? 'bg-white' : ''"
+            >
+              <Handshake
+                :class="route.path === '/dashboard/agentInvestment' ? 'text-black' : 'text-white'"
+              />
+            </div>
+            <div>
+              <p>Financial Advisor</p>
+            </div>
+          </nuxt-link>
+        </li>
       </ul>
     </nav>
 
     <div class="logout flex flex-col mt-3 overflow-hidden bg-gray-700 rounded-lg">
-      <ul>
-        <li class="flex p-2 justify-center items-center">
-          <nuxt-link to="/dashboard" class="flex justify-center items-center gap-2">
+      <nuxt-link to="/" class="flex justify-center items-center gap-2">
+        <ul>
+          <li class="flex p-2 justify-center items-center">
             <LogOut />
-          </nuxt-link>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </nuxt-link>
     </div>
   </aside>
 </template>
