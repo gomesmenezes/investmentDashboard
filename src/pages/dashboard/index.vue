@@ -3,6 +3,7 @@ import Card from '@/components/moleculas/Card.vue';
 import Assets from '@/components/moleculas/Assets.vue';
 import Sidebar from '@/components/organism/Sidebar.vue';
 import ChartDashboard from '@/components/moleculas/ChartDashboard.vue';
+import CardSeconde from '@/components/moleculas/CardSeconde.vue';
 
 const investValue = [1827.07, 350, 150];
 const totalValue = parseFloat(investValue.reduce((acc, val) => acc + val, 0).toFixed(2));
@@ -14,7 +15,7 @@ const totalValue = parseFloat(investValue.reduce((acc, val) => acc + val, 0).toF
     <div class="cards-container">
       <div class="flex gap-5">
         <Card :totalValue="totalValue" />
-        <Card :totalValue="totalValue" />
+        <CardSeconde />
       </div>
 
       <div class="chart-assets-container flex mt-5">
