@@ -17,7 +17,7 @@ const valuePorcentage = ref(0);
 </script>
 
 <template>
-  <div class="card bg-[#0B1739] px-8 py-5 rounded-2xl mt-[28px] max-w-[350px]">
+  <div class="card bg-[#0B1739] px-8 py-5 rounded-2xl mt-[28px] max-w-[350px] max-h-[160px]">
     <div class="flex gap-10 items-center mb-5 justify-between">
       <div class="flex gap-2 items-center">
         <div v-if="showMoney">
@@ -39,12 +39,6 @@ const valuePorcentage = ref(0);
         </div>
         <div v-else>
           <p class="font-bold text-lg">R$******</p>
-        </div>
-        <div
-          class="rounded-md px-2 bg-[#1a9e30a1]"
-          :class="valuePorcentage < 0 ? 'bg-red-500' : 'bg-green-500'"
-        >
-          {{ valuePorcentage }}%
         </div>
       </div>
     </div>

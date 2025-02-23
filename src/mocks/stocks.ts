@@ -1,58 +1,66 @@
-import { Stock } from '@/types/stock';
+export interface Stock {
+  id: number;
+  stockName: string;
+  stockQuantity: number;
+  stockPriceBuy: number;
+  stockPriceCurrent: number;
+  stockValuation: number;
+  logourl?: string;
+}
 
 export const mockStocks: Stock[] = [
   {
     id: 1,
-    stockName: 'Apple',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
-    stockQuantity: 10,
+    stockName: 'PETR4',
+    stockQuantity: 1,
     stockPriceBuy: 100,
-    stockPriceCurrent: 200,
-    stockValuation: 15,
+    stockPriceCurrent: 0,
+    stockValuation: 0,
+    logourl: '',
   },
   {
     id: 2,
-    stockName: 'Microsoft',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
-    stockQuantity: 15,
+    stockName: 'CMIG4',
+    stockQuantity: 3,
     stockPriceBuy: 150,
-    stockPriceCurrent: 250,
-    stockValuation: 20,
+    stockPriceCurrent: 0,
+    stockValuation: 0,
+    logourl: '',
   },
   {
     id: 3,
-    stockName: 'Google',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
-    stockQuantity: 8,
+    stockName: 'ITSA4',
+    stockQuantity: 7,
     stockPriceBuy: 1200,
-    stockPriceCurrent: 1500,
-    stockValuation: 12.5,
+    stockPriceCurrent: 0,
+    stockValuation: 0,
+    logourl: '',
   },
   {
     id: 4,
-    stockName: 'Amazon',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
-    stockQuantity: 5,
-    stockPriceBuy: 1700,
-    stockPriceCurrent: 1900,
-    stockValuation: 11.8,
+    stockName: 'BBAS3',
+    stockQuantity: 2,
+    stockPriceBuy: 25,
+    stockPriceCurrent: 0,
+    stockValuation: 0,
+    logourl: '',
   },
   {
     id: 5,
-    stockName: 'Tesla',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg',
-    stockQuantity: 12,
-    stockPriceBuy: 600,
-    stockPriceCurrent: 900,
-    stockValuation: 30,
+    stockName: 'TAEE11',
+    stockQuantity: 1,
+    stockPriceBuy: 50,
+    stockPriceCurrent: 0,
+    stockValuation: 0,
+    logourl: '',
   },
   {
     id: 6,
-    stockName: 'Nvidia',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg',
-    stockQuantity: 20,
-    stockPriceBuy: 500,
-    stockPriceCurrent: 750,
-    stockValuation: 25,
+    stockName: 'SPYI11',
+    stockQuantity: 1,
+    stockPriceBuy: 50,
+    stockPriceCurrent: 0,
+    stockValuation: 0,
+    logourl: '',
   },
 ];

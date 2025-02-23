@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Chart from 'primevue/chart';
-const investValue = [1000, 350, 150];
+const investValue = [1827.07, 350, 150];
 const totalValue = investValue.reduce((acc, val) => acc + val, 0);
 
 const chartData = reactive({

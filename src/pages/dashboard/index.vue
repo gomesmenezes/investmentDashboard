@@ -7,15 +7,23 @@ import CardSeconde from '@/components/moleculas/CardSeconde.vue';
 
 const investValue = [1827.07, 350, 150];
 const totalValue = parseFloat(investValue.reduce((acc, val) => acc + val, 0).toFixed(2));
+
+const crescimentoPercentual = (moneyLastMonth: number, moneyCurrentMonth: number) => {
+  return ((moneyCurrentMonth - moneyLastMonth) / moneyLastMonth) * 100;
+};
 </script>
 
 <template>
   <div class="container flex text-white gap-5">
     <Sidebar />
     <div class="cards-container">
-      <div class="flex gap-5">
+      <div class="flex gap-10">
         <Card :totalValue="totalValue" />
-        <CardSeconde />
+        <CardSeconde
+          title="Your Wallet"
+          :percetageOfIncrease="crescimentoPercentual(450, 1827)"
+          description="Grow since last month"
+        />
       </div>
 
       <div class="chart-assets-container flex mt-5">
