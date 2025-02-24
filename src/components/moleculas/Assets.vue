@@ -7,7 +7,7 @@ const stocks = ref<Stock[]>(mockStocks);
 const fetchStockData = async (stock: Stock): Promise<Partial<Stock> | null> => {
   try {
     const response = await fetch(
-      `https://brapi.dev/api/quote/${stock.stockName}?range=1d&interval=1d&token=6mp5RizBJ5yAtFBdjXMz4E`
+      `https://brapi.dev/api/quote/${stock.stockName}?range=1d&interval=1d&token=qy8q1WvwrS7bRWhWgsfZi2`
     );
     const data = await response.json();
 
@@ -58,7 +58,12 @@ onMounted(() => {
         </div>
         <div class="flex flex-col items-end">
           <p>R$ {{ stock.stockPriceCurrent.toFixed(2) }}</p>
-          <p class="flex text-end">{{ stock.stockValuation.toFixed(2) }}%</p>
+          <p v-if="stock.stockValuation > 0" class="flex text-end text-green-400">
+            {{ stock.stockValuation.toFixed(2) }}%
+          </p>
+          <p v-if="stock.stockValuation < 0" class="flex text-end text-red-400">
+            {{ stock.stockValuation.toFixed(2) }}%
+          </p>
         </div>
       </div>
     </div>

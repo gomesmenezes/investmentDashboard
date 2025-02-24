@@ -4,6 +4,7 @@ import Assets from '@/components/moleculas/Assets.vue';
 import Sidebar from '@/components/organism/Sidebar.vue';
 import ChartDashboard from '@/components/moleculas/ChartDashboard.vue';
 import CardSeconde from '@/components/moleculas/CardSeconde.vue';
+import ValueInvestment from '@/components/moleculas/ValueInvestment.vue';
 
 const investValue = [1827.07, 350, 150];
 const totalValue = parseFloat(investValue.reduce((acc, val) => acc + val, 0).toFixed(2));
@@ -26,9 +27,10 @@ const crescimentoPercentual = (moneyLastMonth: number, moneyCurrentMonth: number
         />
       </div>
 
-      <div class="chart-assets-container flex mt-5">
+      <div class="chart-assets-container flex mt-5 gap-5">
         <ChartDashboard />
         <Assets />
+        <ValueInvestment />
       </div>
     </div>
   </div>
