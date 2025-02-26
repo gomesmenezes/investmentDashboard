@@ -38,12 +38,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-[#0B1739] rounded-md w-full">
-    <div class="assets flex flex-col p-3 gap-5 mx-auto w-full h-full">
+  <div class="bg-[#0B1739] rounded-md">
+    <div class="assets flex flex-col p-3 gap-5 mx-auto h-full">
       <div
         v-for="stock in stocks"
         :key="stock.id"
-        class="row bg-[#112459] flex gap-5 items-center rounded-lg w-full max-w-2xl px-6 py-3 justify-between"
+        class="row bg-[#112459] flex gap-5 items-center rounded-lg max-w-2xl px-6 py-3 justify-between"
       >
         <div class="flex flex-row gap-2 items-center">
           <div
@@ -58,10 +58,7 @@ onMounted(() => {
         </div>
         <div class="flex flex-col items-end">
           <p>R$ {{ stock.stockPriceCurrent.toFixed(2) }}</p>
-          <p v-if="stock.stockValuation > 0" class="flex text-end text-green-400">
-            {{ stock.stockValuation.toFixed(2) }}%
-          </p>
-          <p v-if="stock.stockValuation < 0" class="flex text-end text-red-400">
+          <p :class="stock.stockValuation > 0 ? 'text-green-400' : 'text-red-400'">
             {{ stock.stockValuation.toFixed(2) }}%
           </p>
         </div>

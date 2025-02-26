@@ -13,12 +13,11 @@ const showMoney = ref(false);
 const toggleMoney = () => {
   showMoney.value = !showMoney.value;
 };
-const valuePorcentage = ref(0);
 </script>
 
 <template>
-  <div class="card bg-[#0B1739] px-8 py-5 rounded-2xl mt-[28px] max-w-[350px] max-h-[160px]">
-    <div class="flex gap-10 items-center mb-5 justify-between">
+  <div class="card bg-[#0B1739] px-8 py-5 rounded-2xl max-w-[350px] max-h-[160px]">
+    <div class="flex gap-10 items-center mb-5 justify-between text-md">
       <div class="flex gap-2 items-center">
         <div v-if="showMoney">
           <Eye @click="toggleMoney" />
@@ -26,7 +25,7 @@ const valuePorcentage = ref(0);
         <div v-else @click="toggleMoney">
           <EyeOff />
         </div>
-        <p class="font-normal text-xl">Balance Investment</p>
+        <p class="font-normal">Balance Investment</p>
       </div>
       <div>
         <CircleEllipsis />
@@ -34,7 +33,7 @@ const valuePorcentage = ref(0);
     </div>
     <div>
       <div class="flex gap-3 items-center">
-        <div v-if="showMoney" class="value">
+        <div v-if="showMoney">
           <p class="font-bold text-lg">R$ {{ totalValue.toFixed(2) }}</p>
         </div>
         <div v-else>

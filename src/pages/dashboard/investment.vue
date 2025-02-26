@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Sidebar from '@/components/organism/Sidebar.vue';
+import BarSide from '@/components/organism/BarSide.vue';
 </script>
 
 <template>
   <div>
-    <Sidebar />
+    <BarSide />
   </div>
 </template>

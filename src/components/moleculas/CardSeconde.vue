@@ -17,9 +17,9 @@ defineProps({
 
 <template>
   <div
-    class="card bg-[#0B1739] px-8 py-5 rounded-2xl mt-[28px] max-w-[350px] max-h-[160px] flex justify-center items-center"
+    class="card bg-[#0B1739] px-8 py-5 rounded-2xl max-w-[350px] max-h-[160px] flex justify-center items-center"
   >
-    <div class="flex gap-10 items-center justify-between">
+    <div class="flex gap-10 items-center justify-between text-md">
       <div class="">
         <p class="text-xl">{{ title }}</p>
         <p class="opacity-50">{{ description }}</p>
