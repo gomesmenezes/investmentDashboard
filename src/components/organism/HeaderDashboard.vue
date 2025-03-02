@@ -29,7 +29,10 @@ const toggleVisibility = () => {
         <EyeOff v-else class="w-5 h-5" color="black" />
       </button>
       <Button id="btn" class="h-[44px]" color="black" label="Add Investment" />
-      <Button id="btn1" variant="outlined" class="!border-2 !border-[#0b1739]">
+      <Button
+        id="btn1"
+        variant="outlined"
+        class="!border-2 !border-[#0b1739] bg-transparent!">
         <AppWindow color="black" />
       </Button>
     </div>
