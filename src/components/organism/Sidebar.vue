@@ -1,90 +1,49 @@
 <script setup lang="ts">
-import { House, Wallet, LogOut, Handshake } from 'lucide-vue-next';
-import { onMounted } from 'vue';
+import { LayoutDashboard, HandCoins, ChartCandlestick, LogOut } from 'lucide-vue-next';
+
 const route = useRoute();
-
-let sidebar: null | any;
-let logout: null | any;
-
-const initialWitdhDashboard = () => {
-  sidebar = document.getElementById('sidebar');
-  logout = document.getElementById('logout');
-  sidebar?.classList.add('w-[165px]');
-};
-
-onMounted(() => {
-  document.getElementById('sidebar');
-  setTimeout(() => {
-    initialWitdhDashboard();
-    setTimeout(() => {
-      sidebar?.classList.remove('w-[165px]');
-    }, 1500);
-  }, 0);
-});
 </script>
 
 <template>
-  <aside
-    id="sidebar"
-    class="h-[95vh] flex flex-col justify-between text-white mt-5 ml-5 rounded-xl w-[65px] px-3 py-5 bg-[#0B1739] hover:w-[165px] transition-all duration-700 ease-in-out"
-  >
-    <nav class="overflow-hidden flex flex-col">
-      <ul class="flex flex-col gap-4 justify-center items-start">
-        <li class="flex rounded-lg">
-          <nuxt-link to="/dashboard" class="flex justify-center items-center gap-3">
-            <div class="p-2 rounded-lg" :class="route.path === '/dashboard' ? 'bg-white' : ''">
-              <House :class="route.path === '/dashboard' ? 'text-black' : 'text-white'" />
-            </div>
-            <div>
-              <p>Dashboard</p>
-            </div>
-          </nuxt-link>
-        </li>
-
-        <li class="flex rounded-lg">
-          <nuxt-link to="/dashboard/investment" class="flex justify-center items-center gap-2">
-            <div
-              class="p-2 rounded-lg"
-              :class="route.path === '/dashboard/investment' ? 'bg-white' : ''"
-            >
-              <Wallet
-                :class="route.path === '/dashboard/investment' ? 'text-black' : 'text-white'"
-              />
-            </div>
-            <div>
-              <p>Investment</p>
-            </div>
-          </nuxt-link>
-        </li>
-
-        <li class="flex rounded-lg">
-          <nuxt-link to="/dashboard/agentInvestment" class="flex justify-center items-center gap-2">
-            <div
-              class="p-2 rounded-lg"
-              :class="route.path === '/dashboard/agentInvestment' ? 'bg-white' : ''"
-            >
-              <Handshake
-                :class="route.path === '/dashboard/agentInvestment' ? 'text-black' : 'text-white'"
-              />
-            </div>
-            <div>
-              <p>Financial Advisor</p>
-            </div>
-          </nuxt-link>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="logout flex flex-col mt-3 overflow-hidden bg-gray-700 rounded-lg">
-      <nuxt-link to="/" class="flex justify-center items-center gap-2">
-        <ul>
-          <li class="flex p-2 justify-center items-center">
-            <LogOut />
+  <div class="h-screen p-5 inline-block bg-[#112459]">
+    <nav class="flex justify-between flex-col h-[95%]">
+      <ul class="flex flex-col gap-2.5">
+        <nuxt-link to="/dashboard">
+          <li
+            class="flex text-lg items-center gap-3 rounded-md p-2"
+            :class="route.path === '/dashboard' ? 'bg-white text-black' : ''">
+            <LayoutDashboard />
+            <p>Overview</p>
           </li>
-        </ul>
-      </nuxt-link>
-    </div>
-  </aside>
-</template>
+        </nuxt-link>
 
-<style></style>
+        <nuxt-link to="/dashboard/investment">
+          <li
+            class="flex text-lg items-center gap-3 rounded-md p-2"
+            :class="route.path === '/dashboard/investment' ? 'bg-white text-black' : ''">
+            <HandCoins />
+            <p>Investment</p>
+          </li>
+        </nuxt-link>
+
+        <nuxt-link to="/dashboard/agentInvestment">
+          <li
+            class="flex text-lg items-center gap-3 rounded-md p-2"
+            :class="route.path === '/dashboard/agentInvestment' ? 'bg-white text-black' : ''">
+            <ChartCandlestick />
+            <p>Agent Investor</p>
+          </li>
+        </nuxt-link>
+      </ul>
+      <div class="flex flex-col bg-gray-700 rounded-lg">
+        <nuxt-link to="/" class="flex justify-center items-center gap-2">
+          <ul>
+            <li class="flex p-2 justify-center items-center">
+              <LogOut />
+            </li>
+          </ul>
+        </nuxt-link>
+      </div>
+    </nav>
+  </div>
+</template>

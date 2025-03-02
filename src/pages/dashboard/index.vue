@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import Chart from 'primevue/chart';
-import BarSide from '@/components/organism/BarSide.vue';
-import Card from '@/components/moleculas/Card.vue';
-import CardSeconde from '@/components/moleculas/CardSeconde.vue';
+import BarSide from '@/components/organism/SideBar.vue';
+import Card from '@/components/moleculas/Cards/CInvested.vue';
+import CardSeconde from '@/components/moleculas/Cards/CGrowIncome.vue';
 import Assets from '@/components/moleculas/Assets.vue';
 import cryptoCard from '@/components/moleculas/cryptoCard.vue';
 
@@ -101,11 +101,14 @@ const setChartOptions = () => {
           <CardSeconde
             title="Increase"
             :percetageOfIncrease="15"
-            description="Grow in since last month"
-          />
+            description="Grow in since last month" />
         </div>
         <div class="w-full">
-          <Chart type="bar" :data="chartData" :options="chartOptions" class="h-[25rem]" />
+          <Chart
+            type="bar"
+            :data="chartData"
+            :options="chartOptions"
+            class="h-[25rem]" />
         </div>
       </div>
       <div>

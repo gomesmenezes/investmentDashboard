@@ -4,11 +4,13 @@ interface Props {
   percentageOfIncrease: number;
   description: string;
   width?: string | number;
+  height?: string | number;
   hideValue?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   width: '100%',
+  height: '130px',
   hideValue: true
 });
 </script>
@@ -17,7 +19,8 @@ const props = withDefaults(defineProps<Props>(), {
   <div
     class="bg-[#0B1739] px-8 py-5 rounded-2xl max-h-[160px] flex justify-center items-center"
     :style="{ 
-      minWidth: typeof props.width === 'number' ? `${props.width}px` : props.width
+      width: typeof props.width === 'number' ? `${props.width}px` : props.width,
+      height: typeof props.height === 'number' ? `${props.height}px` : props.height
     }">
     <div class="flex gap-10 items-center justify-between text-md w-full">
       <div class="">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import BarSide from '@/components/organism/BarSide.vue';
-import Card from '@/components/moleculas/Card.vue';
-import CardSeconde from '@/components/moleculas/CardSeconde.vue';
+import BarSide from '@/components/organism/SideBar.vue';
+import Card from '@/components/moleculas/Cards/CInvested.vue';
+import CardSeconde from '@/components/moleculas/Cards/CGrowIncome.vue';
 import Assets from '@/components/moleculas/Assets.vue';
 
 const investValueLastMonth = [1500, 300, 100]; // Reserva, Ações, Criptomoedas (mês anterior)

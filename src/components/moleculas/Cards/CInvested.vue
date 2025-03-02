@@ -13,7 +13,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   width: '100%',
-  height: '160px',
+  height: '130px',
   currency: 'R$',
   hideValue: true
 });
@@ -31,8 +31,8 @@ function toggleMoney() {
       width: typeof props.width === 'number' ? `${props.width}px` : props.width,
       minHeight: typeof props.height === 'number' ? `${props.height}px` : props.height
     }"
-    class="bg-[#0B1739] px-8 py-5 rounded-2xl flex flex-col justify-between">
-    <div class="flex items-center justify-between mb-4">
+    class="bg-[#0B1739] px-8 py-5 rounded-2xl flex flex-col my-auto justify-center">
+    <div class="flex items-center justify-between mb-4 ">
       <div class="flex items-center gap-3">
         <button
           @click="toggleMoney"
