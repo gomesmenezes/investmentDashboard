@@ -7,7 +7,7 @@ import { nodes } from '@/mocks/table';
 </script>
 
 <template>
-  <div class="card">
+  <div class="card border-2 border-solid border-[#d7d7d7] rounded-lg p-5">
     <TreeTable
       :value="nodes"
       tableStyle="min-width: 50rem"
@@ -70,10 +70,7 @@ import { nodes } from '@/mocks/table';
 
       <template #footer>
         <div class="flex justify-start">
-          <Button
-            icon="pi pi-refresh"
-            label="Reload"
-            class="bg-red-600 hover:bg-red-700 text-white" />
+          <Button icon="pi pi-refresh" label="Reload" class="border-none" />
         </div>
       </template>
     </TreeTable>
@@ -117,11 +114,16 @@ import { nodes } from '@/mocks/table';
 
 /* Botão de reload no footer */
 .p-treetable-footer .p-button {
-  background-color: #dc2626 !important; /* Vermelho escuro */
-  border-color: #dc2626 !important;
+  color: white !important;
 }
 
 .p-treetable-footer .p-button:hover {
-  background-color: #b91c1c !important; /* Vermelho mais escuro no hover */
+  background-color: #112458 !important;
+}
+
+.p-button {
+  background-color: #0B1739 !important;
+  border-color: transparent !important;
+  color: white !important;
 }
 </style>
