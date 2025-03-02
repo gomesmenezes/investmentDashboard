@@ -5,6 +5,7 @@ import Card from '@/components/moleculas/Cards/CInvested.vue';
 import CardSeconde from '@/components/moleculas/Cards/CGrowIncome.vue';
 import CardThree from '@/components/moleculas/Cards/CReturnInvestment.vue';
 import HeaderDashboard from '@/components/organism/HeaderDashboard.vue';
+import TableInvestment from '@/components/moleculas/TableInvestment.vue';
 
 const investValueCurrentMonth = [1827.07, 350, 150]; // Reserva, Ações, Criptomoedas (mês atual)
 
@@ -24,9 +25,10 @@ const totalInvestValue = investValueCurrentMonth.reduce((acc, val) => acc + val,
       <HeaderDashboard
         :hideValue="hideValueGlobal"
         @toggle-visibility="toggleVisibility" />
+
       <Divider />
 
-      <div class="my-0 grid grid-cols-3 gap-5 w-full">
+      <div class="cards mb-5 my-0 grid grid-cols-3 gap-5 w-full">
         <Card
           @toggle-visibility="toggleVisibility"
           :hide-value="hideValueGlobal"
@@ -51,7 +53,7 @@ const totalInvestValue = investValueCurrentMonth.reduce((acc, val) => acc + val,
           class="w-full h-[130px]" />
       </div>
 
-      <div class="table"></div>
+      <TableInvestment />
     </section>
   </div>
 </template>

@@ -32,13 +32,8 @@ const props = withDefaults(defineProps<Props>(), {
     <div>
       <p class="text-2xl font-semibold">
         {{ currency }}
-        {{ hideValue ? '****' : valueReturn }}
+        {{ hideValue ? '****' : valueReturn.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
         ({{ hideValue ? '**' : porcentage
-
-
-
-
-
 
         }}%)
       </p>
