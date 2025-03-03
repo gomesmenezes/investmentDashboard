@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { stocks } from '@/composable/useStock.js'; // Ajuste o caminho conforme necessário
+import { stocks } from '@/composable/useStock.js';
 import TreeNode from '@/types/table.js';
 
 export const nodes = computed<TreeNode[]>(() => {
@@ -9,7 +9,7 @@ export const nodes = computed<TreeNode[]>(() => {
       logoUrlStock: stock.logourl || '',
       stockName: stock.stockName,
       type: stock.type || 'Stocks',
-      amount: stock.stockQuantity || 0,
+      quantity: stock.stockQuantity || 0,
       currentValue: stock.stockPriceCurrent || 0,
       purchasePrice: stock.stockPriceBuy || 0,
       date: stock.date || 'N/A',

@@ -52,8 +52,8 @@ onMounted(async () => {
         headerStyle="background-color: white; color: black;"></Column>
 
       <Column
-        field="amount"
-        header="Amount"
+        field="quantity"
+        header="Quantity"
         style="width: 150px"
         headerStyle="background-color: white; color: black;"></Column>
 

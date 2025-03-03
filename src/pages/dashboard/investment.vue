@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, ref, computed } from 'vue';
 import Divider from 'primevue/divider';
 import BarSide from '@/components/organism/SideBar.vue';
 import Card from '@/components/moleculas/Cards/CInvested.vue';
@@ -6,8 +7,13 @@ import CardSeconde from '@/components/moleculas/Cards/CGrowIncome.vue';
 import CardThree from '@/components/moleculas/Cards/CReturnInvestment.vue';
 import HeaderDashboard from '@/components/organism/HeaderDashboard.vue';
 import TableInvestment from '@/components/moleculas/TableInvestment.vue';
-
-const investValueCurrentMonth = [1827.07, 350, 150]; // Reserva, Ações, Criptomoedas (mês atual)
+import {
+  stocks,
+  initStocks,
+  totalInvestment,
+  totalReturn, // Importe o retorno total
+  returnPercentage, // Importe a porcentagem de retorno
+} from '@/composable/useStock'; // Importe as variáveis corretas
 
 const hideValueGlobal = ref(true);
 
@@ -15,7 +21,10 @@ const toggleVisibility = () => {
   hideValueGlobal.value = !hideValueGlobal.value;
 };
 
-const totalInvestValue = investValueCurrentMonth.reduce((acc, val) => acc + val, 0);
+// Inicializa os preços das ações ao carregar o componente
+onMounted(async () => {
+  await initStocks();
+});
 </script>
 
 <template>
@@ -29,11 +38,12 @@ const totalInvestValue = investValueCurrentMonth.reduce((acc, val) => acc + val,
       <Divider />
 
       <div class="cards mb-5 my-0 grid grid-cols-3 gap-5 w-full">
+        <!-- Componente Card com o valor total do investimento -->
         <Card
           @toggle-visibility="toggleVisibility"
           :hide-value="hideValueGlobal"
           title="Total Invested"
-          :total-value="12543.67"
+          :total-value="totalInvestment"
           class="w-full h-[130px]" />
 
         <CardSeconde
@@ -48,8 +58,8 @@ const totalInvestValue = investValueCurrentMonth.reduce((acc, val) => acc + val,
           @toggle-visibility="toggleVisibility"
           :hide-value="hideValueGlobal"
           title="Total Return"
-          :value-return="12543.67"
-          :porcentage="15"
+          :value-return="totalReturn"
+          :porcentage="returnPercentage"
           class="w-full h-[130px]" />
       </div>
 

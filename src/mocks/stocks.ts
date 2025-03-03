@@ -7,7 +7,6 @@ export interface Stock {
   stockValuation: number;
   logourl?: string;
   type?: string;
-  amount?: number;
   purchasePrice?: number;
   date?: string;
 }
@@ -22,7 +21,6 @@ export const mockStocks: Stock[] = [
     stockValuation: 0,
     logourl: '',
     type: 'Stocks',
-    amount: 1,
     purchasePrice: 100,
     date: '15/03/2023',
   },
@@ -35,7 +33,6 @@ export const mockStocks: Stock[] = [
     stockValuation: 0,
     logourl: '',
     type: 'Stocks',
-    amount: 3,
     purchasePrice: 150,
     date: '10/04/2023',
   },
@@ -48,7 +45,6 @@ export const mockStocks: Stock[] = [
     stockValuation: 0,
     logourl: '',
     type: 'Stocks',
-    amount: 2,
     purchasePrice: 200,
     date: '05/05/2023',
   },
@@ -70,7 +66,6 @@ export const mockStocks: Stock[] = [
     stockValuation: 0,
     logourl: '',
     type: 'Stocks',
-    amount: 1,
     purchasePrice: 100,
     date: '15/03/2023',
   },
@@ -82,9 +77,14 @@ export const mockStocks: Stock[] = [
     stockPriceCurrent: 0,
     stockValuation: 0,
     logourl: '',
-    type: 'Stocks',
-    amount: 1,
+    type: 'ETF',
     purchasePrice: 100,
     date: '15/03/2023',
   },
 ];
+
+export function calculateTotalInvestment(stocks: Stock[]): number {
+  return stocks.reduce((total, stock) => {
+    return total + stock.stockQuantity * stock.stockPriceCurrent;
+  }, 0);
+}

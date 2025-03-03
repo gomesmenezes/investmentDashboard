@@ -1,6 +1,40 @@
-import { type Stock, mockStocks } from '@/mocks/stocks.js';
+import { ref, computed } from 'vue';
+import {
+  type Stock,
+  mockStocks,
+  calculateTotalInvestment,
+} from '@/mocks/stocks.js';
 
 export const stocks = ref<Stock[]>(mockStocks);
+
+export const totalInvestment = computed(() =>
+  calculateTotalInvestment(stocks.value)
+);
+
+// Calcula o valor total investido (comprado)
+export const totalInvested = computed(() => {
+  return stocks.value.reduce((total, stock) => {
+    return total + stock.stockQuantity * stock.stockPriceBuy;
+  }, 0);
+});
+
+// Calcula o valor total atual
+export const totalCurrentValue = computed(() => {
+  return stocks.value.reduce((total, stock) => {
+    return total + stock.stockQuantity * stock.stockPriceCurrent;
+  }, 0);
+});
+
+// Calcula o retorno total (valor atual - valor investido)
+export const totalReturn = computed(() => {
+  return totalCurrentValue.value - totalInvested.value;
+});
+
+// Calcula a porcentagem de retorno
+export const returnPercentage = computed(() => {
+  if (totalInvested.value === 0) return 0; // Evita divisão por zero
+  return ((totalReturn.value / totalInvested.value) * 100).toFixed(2); // 2 casas decimais
+});
 
 export const fetchStockData = async (
   stock: Stock
@@ -32,4 +66,8 @@ export const updateStockPrices = async () => {
     const updatedData = results[index];
     return updatedData ? { ...stock, ...updatedData } : stock;
   });
+};
+
+export const initStocks = async () => {
+  await updateStockPrices();
 };

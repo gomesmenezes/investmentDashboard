@@ -1,12 +1,18 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { AppWindow, Eye, EyeOff } from 'lucide-vue-next';
 import InputNumber from 'primevue/inputnumber';
+import InputText from 'primevue/inputtext';
 import Drawer from 'primevue/drawer';
-
+import CascadeSelect from 'primevue/cascadeselect';
+import Dialog from 'primevue/dialog';
+import MultiSelect from 'primevue/multiselect';
+import Button from 'primevue/button';
+import { tagInvestmentOptions } from '@/types/stock';
 
 const visibleLeft = ref(false);
 const visible = ref(false);
+const selectedTag = ref(null);
 
 // Emits
 const emit = defineEmits(['toggle-visibility']);
@@ -20,6 +26,11 @@ defineProps({
 const toggleVisibility = () => {
   emit('toggle-visibility');
 };
+
+// Verifique se as opções estão sendo carregadas corretamente
+onMounted(() => {
+  console.log('tagInvestmentOptions:', tagInvestmentOptions);
+});
 </script>
 
 <template>
@@ -80,28 +91,89 @@ const toggleVisibility = () => {
 
     <div class="flex items-center gap-4 mb-4">
       <label for="stockId" class="font-semibold w-24">Stock ID</label>
-      <InputText id="stockId" class="flex-auto" autocomplete="off" />
+      <InputText
+        id="stockId"
+        class="flex-auto"
+        autocomplete="off"
+        placeholder="Ex: PETR4" />
     </div>
 
     <div class="flex items-center gap-4 mb-4">
       <label for="quantityStock" class="font-semibold w-24">Quantity</label>
-      <InputNumber id="quantityStock" class="flex-auto" autocomplete="off" />
+      <InputNumber
+        id="quantityStock"
+        class="flex-auto"
+        autocomplete="off"
+        placeholder="100" />
     </div>
 
     <div class="flex items-center gap-4 mb-4">
       <label for="purchasePrice" class="font-semibold w-24">
         Purchase Price
       </label>
-      <InputNumber id="purchasePrice" class="flex-auto" autocomplete="off" />
+      <InputNumber
+        id="purchasePrice"
+        class="flex-auto"
+        autocomplete="off"
+        placeholder="37.57" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-4">
+      <label for="ms_tagInvestment" class="font-semibold min-w-24!">
+        Category
+      </label>
+      <Select
+        v-model="selectedTag"
+        :options="tagInvestmentOptions"
+        optionLabel="name"
+        placeholder="Select a Tag"
+        class="w-full" />
     </div>
 
     <div class="flex justify-end gap-2 mt-4">
       <Button
         type="button"
-        label="Cancel"
+        label="Cancelar"
         severity="secondary"
         @click="visible = false" />
-      <Button type="button" label="Save" @click="visible = false" />
+      <Button type="button" label="Adicionar" @click="visible = false" />
     </div>
   </Dialog>
 </template>
+
+<style>
+.p-select{
+  background-color: #d7d7d7 !important;
+  color: black !important;
+  border-color: #0b1739 !important;
+}
+
+.p-select-label {
+  background-color: #d7d7d7 !important;
+  color: black !important;
+  border-color: #0b1739 !important;
+}
+
+.p-select-overlay {
+  background-color: #0b1739 !important;
+  color: black !important;
+  border-color: #0b1739 !important;
+}
+
+.p-select-option:hover {
+  background-color: #152d6f !important;
+}
+
+.p-dialog {
+  background-color: white !important;
+  color: black !important;
+}
+.p-inputtext {
+  background-color: #d7d7d7 !important;
+  color: black !important;
+}
+
+.p-inputtext:enabled:focus {
+  border-color: #0b1739 !important;
+}
+</style>

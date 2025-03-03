@@ -11,7 +11,7 @@ export interface TreeNode {
     logoUrlStock: string;
     stockName: string;
     type: string;
-    amount: number;
+    quantity: number;
     currentValue: number;
     purchasePrice: number;
     date: string;
