@@ -78,12 +78,7 @@ onMounted(async () => {
       <Column style="width: 10rem">
         <template #body>
           <div class="flex flex-wrap gap-2">
-            <Button type="button" icon="pi pi-search" rounded />
-            <Button
-              type="button"
-              icon="pi pi-pencil"
-              rounded
-              severity="success" />
+            <Button type="button" icon="pi pi-trash" rounded />
           </div>
         </template>
       </Column>

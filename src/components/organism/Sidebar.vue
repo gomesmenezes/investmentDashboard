@@ -5,7 +5,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="h-screen p-5 inline-block bg-[#112459]">
+  <div class="min-h-screen p-5 inline-block bg-[#112459]">
     <nav class="flex justify-between flex-col h-[95%]">
       <ul class="flex flex-col gap-2.5">
         <nuxt-link to="/dashboard">
@@ -35,7 +35,7 @@ const route = useRoute();
           </li>
         </nuxt-link>
       </ul>
-      <div class="flex flex-col bg-gray-700 rounded-lg">
+      <div class="flex flex-col bg-gray-700 rounded-lg ">
         <nuxt-link to="/" class="flex justify-center items-center gap-2">
           <ul>
             <li class="flex p-2 justify-center items-center">

@@ -19,7 +19,7 @@ const totalInvestValue = investValueCurrentMonth.reduce((acc, val) => acc + val,
 </script>
 
 <template>
-  <div class="flex overflow-hidden">
+  <div class="flex min-h-screen">
     <BarSide />
     <section class="px-8 py-5 mx-auto w-screen">
       <HeaderDashboard
