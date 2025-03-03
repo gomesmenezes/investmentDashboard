@@ -26,7 +26,7 @@ onMounted(async () => {
       <Column
         field="logoUrlStock"
         header=""
-        style="width: 50px"
+        style="width: 150px"
         headerStyle="background-color: white; color: black;">
         <template #body="{ node }">
           <img
