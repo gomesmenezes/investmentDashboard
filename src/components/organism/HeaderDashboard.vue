@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from 'vue'; // Importe ref para gerenciar o estado reativo
+import { ref } from 'vue';
 import { AppWindow, Eye, EyeOff } from 'lucide-vue-next';
 import InputNumber from 'primevue/inputnumber';
+import Drawer from 'primevue/drawer';
 
-// Estado reativo para controlar a visibilidade do Dialog
+
+const visibleLeft = ref(false);
 const visible = ref(false);
 
 // Emits
@@ -50,11 +52,21 @@ const toggleVisibility = () => {
       <Button
         id="btn1"
         variant="outlined"
+        @click="visibleLeft = true"
         class="!border-2 !border-[#0b1739] bg-transparent!">
         <AppWindow color="black" />
       </Button>
     </div>
   </header>
+
+  <Drawer v-model:visible="visibleLeft" header="Right Drawer" position="right">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+  </Drawer>
 
   <!-- Dialog -->
   <Dialog

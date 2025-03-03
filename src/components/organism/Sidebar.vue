@@ -31,7 +31,7 @@ const route = useRoute();
             class="flex text-lg items-center gap-3 rounded-md p-2"
             :class="route.path === '/dashboard/agentInvestment' ? 'bg-white text-black' : ''">
             <ChartCandlestick />
-            <p>Agent Investor</p>
+            <p>IA Advisor</p>
           </li>
         </nuxt-link>
       </ul>
