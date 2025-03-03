@@ -3,9 +3,8 @@ import BarSide from '@/components/organism/SideBar.vue';
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex min-h-screen w-full">
     <BarSide />
-    <div class="grid grid-cols-2 gap-5 pt-8 px-5"></div>
-    <div></div>
+    <section class="px-8 py-5 mx-auto w-screen"></section>
   </div>
 </template>

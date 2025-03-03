@@ -27,7 +27,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex min-h-screen">
+  <div class="flex min-h-screen w-full">
     <BarSide />
     <section class="px-8 py-5 mx-auto w-screen">
       <HeaderDashboard

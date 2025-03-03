@@ -8,7 +8,7 @@ import CascadeSelect from 'primevue/cascadeselect';
 import Dialog from 'primevue/dialog';
 import MultiSelect from 'primevue/multiselect';
 import Button from 'primevue/button';
-import { tagInvestmentOptions } from '@/types/stock';
+
 
 const visibleLeft = ref(false);
 const visible = ref(false);
@@ -52,14 +52,6 @@ onMounted(() => {
         <EyeOff v-else class="w-5 h-5" color="black" />
       </button>
 
-      <!-- Botão "Add Investment" para abrir o Dialog -->
-      <Button
-        id="btn"
-        class="h-[44px]"
-        color="black"
-        label="Add Investment"
-        @click="visible = true" />
-
       <Button
         id="btn1"
         variant="outlined"
@@ -78,67 +70,6 @@ onMounted(() => {
       commodo consequat.
     </p>
   </Drawer>
-
-  <!-- Dialog -->
-  <Dialog
-    v-model:visible="visible"
-    modal
-    header="Add Investment"
-    :style="{ width: '25rem' }">
-    <span class="text-surface-500 dark:text-surface-400 block mb-8">
-      Add your investment
-    </span>
-
-    <div class="flex items-center gap-4 mb-4">
-      <label for="stockId" class="font-semibold w-24">Stock ID</label>
-      <InputText
-        id="stockId"
-        class="flex-auto"
-        autocomplete="off"
-        placeholder="Ex: PETR4" />
-    </div>
-
-    <div class="flex items-center gap-4 mb-4">
-      <label for="quantityStock" class="font-semibold w-24">Quantity</label>
-      <InputNumber
-        id="quantityStock"
-        class="flex-auto"
-        autocomplete="off"
-        placeholder="100" />
-    </div>
-
-    <div class="flex items-center gap-4 mb-4">
-      <label for="purchasePrice" class="font-semibold w-24">
-        Purchase Price
-      </label>
-      <InputNumber
-        id="purchasePrice"
-        class="flex-auto"
-        autocomplete="off"
-        placeholder="37.57" />
-    </div>
-
-    <div class="flex items-center gap-4 mb-4">
-      <label for="ms_tagInvestment" class="font-semibold min-w-24!">
-        Category
-      </label>
-      <Select
-        v-model="selectedTag"
-        :options="tagInvestmentOptions"
-        optionLabel="name"
-        placeholder="Select a Tag"
-        class="w-full" />
-    </div>
-
-    <div class="flex justify-end gap-2 mt-4">
-      <Button
-        type="button"
-        label="Cancelar"
-        severity="secondary"
-        @click="visible = false" />
-      <Button type="button" label="Adicionar" @click="visible = false" />
-    </div>
-  </Dialog>
 </template>
 
 <style>

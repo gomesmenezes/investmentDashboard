@@ -5,8 +5,8 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="min-h-screen p-5 inline-block bg-[#112459]">
-    <nav class="flex justify-between flex-col h-[95%]">
+  <div class="min-h-screen min-w-[190px] py-6 px-6 inline-block bg-[#112459]">
+    <nav class="flex justify-between flex-col h-[95%] w-full">
       <ul class="flex flex-col gap-2.5">
         <nuxt-link to="/dashboard">
           <li
