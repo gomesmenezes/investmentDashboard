@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import "primeicons/primeicons.css";
 import TreeTable from 'primevue/treetable';
 import Column from 'primevue/column';
 import { nodes } from '@/mocks/table';
+import { onMounted } from 'vue';
+import { updateStockPrices } from "@/composable/useStock";
+
+onMounted(async () => {
+  await updateStockPrices();
+});
 </script>
 
 <template>
@@ -17,6 +22,21 @@ import { nodes } from '@/mocks/table';
       <template #header>
         <div class="text-xl font-bold">List of your investments</div>
       </template>
+
+      <Column
+        field="logoUrlStock"
+        header=""
+        style="width: 50px"
+        headerStyle="background-color: white; color: black;">
+        <template #body="{ node }">
+          <img
+            v-if="node.data.logoUrlStock"
+            :src="node.data.logoUrlStock"
+            alt="Logo"
+            class="h-8 w-8 object-contain" />
+          <div v-else class="h-8 w-8 bg-gray-200"></div>
+        </template>
+      </Column>
 
       <Column
         field="stockName"
