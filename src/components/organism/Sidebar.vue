@@ -22,7 +22,7 @@ const route = useRoute();
             class="flex text-lg items-center gap-3 rounded-md p-2"
             :class="route.path === '/dashboard/investment' ? 'bg-white text-black' : ''">
             <HandCoins />
-            <p>Investment</p>
+            <p>Cripto</p>
           </li>
         </nuxt-link>
 

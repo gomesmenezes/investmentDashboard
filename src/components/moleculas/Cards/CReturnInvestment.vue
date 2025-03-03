@@ -30,12 +30,17 @@ const props = withDefaults(defineProps<Props>(), {
       <h2 class="text-lg font-medium">{{ title }}</h2>
     </div>
     <div>
-      <p class="text-2xl font-semibold">
+      <p v-if="hideValue" class="text-2xl font-semibold">
         {{ currency }}
         {{ hideValue ? '****' : valueReturn.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
-        ({{ hideValue ? '**' : porcentage
-
-        }}%)
+        ({{ hideValue ? '**' : porcentage }}%)
+      </p>
+      <p
+        v-else="valueReturn !== 0"
+        :class="`text-2xl font-semibold ${valueReturn > 0 ? 'text-green-600' : 'text-red-600'}`">
+        <span class="text-white">{{ currency }}</span>
+        {{ hideValue ? '****' : valueReturn.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
+        ({{ hideValue ? '**' : porcentage }}%)
       </p>
     </div>
   </div>

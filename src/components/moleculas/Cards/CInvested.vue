@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { Eye, EyeOff } from 'lucide-vue-next';
 import { withDefaults } from 'vue'
+import {
+  stocks,
+  initStocks,
+  totalInvestment,
+  totalReturn,
+  returnPercentage,
+  totalCurrentValue
+} from '@/composable/useStock';
 
 interface Props {
   title: string;
@@ -49,7 +57,10 @@ function toggleMoney() {
       <span class="text-2xl font-bold">{{ currency }}</span>
       <div class="text-3xl font-bold">
         <template v-if="!hideValue">
-          {{ totalValue.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
+          <span
+            :class="totalCurrentValue > totalInvestment ? 'text-green-600' : 'text-red-500'">
+            {{ totalValue.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
+          </span>
         </template>
         <template v-else>
           <span class="tracking-widest">•••••</span>
