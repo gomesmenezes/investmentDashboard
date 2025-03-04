@@ -13,7 +13,7 @@ import {
   totalInvestment,
   totalReturn,
   returnPercentage,
-} from '@/composable/useStock';
+} from '@/service/useStock';
 
 const hideValueGlobal = ref(true);
 

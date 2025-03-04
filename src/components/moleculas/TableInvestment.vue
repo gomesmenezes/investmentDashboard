@@ -4,7 +4,7 @@ import TreeTable from 'primevue/treetable';
 import Column from 'primevue/column';
 import { nodes } from '@/mocks/table';
 import { onMounted } from 'vue';
-import { updateStockPrices } from "@/composable/useStock";
+import { updateStockPrices } from "@/service/useStock";
 import { tagInvestmentOptions } from '@/types/stock';
 
 const visible = ref(false);

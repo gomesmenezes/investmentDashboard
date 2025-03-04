@@ -8,7 +8,7 @@ import {
   totalReturn,
   returnPercentage,
   totalCurrentValue
-} from '@/composable/useStock';
+} from '@/service/useStock';
 
 interface Props {
   title: string;
@@ -58,7 +58,7 @@ function toggleMoney() {
       <div class="text-3xl font-bold">
         <template v-if="!hideValue">
           <span
-            :class="totalCurrentValue > totalInvestment ? 'text-green-600' : 'text-red-500'">
+            :class="totalCurrentValue > totalInvestment ? 'text-green-500' : 'text-red-500'">
             {{ totalValue.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
           </span>
         </template>

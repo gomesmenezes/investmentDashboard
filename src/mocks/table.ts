@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { stocks } from '@/composable/useStock.js';
+import { stocks } from '@/service/useStock.js';
 import TreeNode from '@/types/table.js';
 
 export const nodes = computed<TreeNode[]>(() => {

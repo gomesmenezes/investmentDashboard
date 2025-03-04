@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<Props>(), {
       </p>
       <p
         v-else="valueReturn !== 0"
-        :class="`text-2xl font-semibold ${valueReturn > 0 ? 'text-green-600' : 'text-red-600'}`">
+        :class="`text-2xl font-semibold ${valueReturn > 0 ? 'text-green-500' : 'text-red-500'}`">
         <span class="text-white">{{ currency }}</span>
         {{ hideValue ? '****' : valueReturn.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
         ({{ hideValue ? '**' : porcentage }}%)
