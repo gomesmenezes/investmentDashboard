@@ -76,7 +76,10 @@ onMounted(async () => {
           :key="crypto.id"
           class="flex items-center justify-between bg-[#0B1739] text-white rounded-lg p-5 gap-3 mb-2 ">
           <img :src="crypto.image" :alt="crypto.name" width="32" />
-          {{ crypto.name }} ({{ crypto.symbol.toUpperCase() }}) ${{ crypto.current_price }}
+          <div class="">
+            <div>{{ crypto.name }} ({{ crypto.symbol.toUpperCase() }})</div>
+            <div class="font-bold">${{ crypto.current_price.toFixed(2) }}</div>
+          </div>
           <span
             :class="getPriceChangeClass(crypto.price_change_percentage_24h) > 0 ? 'text-green-400' : 'text-red-400 '">
             {{ crypto.price_change_percentage_24h.toFixed(2) }}%

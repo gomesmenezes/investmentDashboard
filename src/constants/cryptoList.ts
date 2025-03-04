@@ -3,4 +3,6 @@ export const cryptoList = [
   { id: 'ethereum' },
   { id: 'solana' },
   { id: 'cardano' },
+  { id: 'pepe' },
+  { id: 'xrp' },
 ];
