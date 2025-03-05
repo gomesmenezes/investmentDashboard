@@ -6,6 +6,5 @@ import BarSide from '@/components/organism/SideBar.vue';
   <div class="flex">
     <BarSide />
     <div class="grid grid-cols-2 gap-5 pt-8 px-5"></div>
-    <div></div>
   </div>
 </template>

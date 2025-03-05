@@ -1,14 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { Bitcoin, Eye, EyeOff } from 'lucide-vue-next';
-import InputNumber from 'primevue/inputnumber';
-import InputText from 'primevue/inputtext';
 import Drawer from 'primevue/drawer';
-import CascadeSelect from 'primevue/cascadeselect';
-import Dialog from 'primevue/dialog';
-import MultiSelect from 'primevue/multiselect';
 import Button from 'primevue/button';
-import {getCryptoPrices, fetchCryptoPrices} from '@/service/useCrypto';
+import {fetchCryptoPrices} from '@/service/useCrypto';
 
 const cryptoPrices = ref([]);
 const loading = ref(true);
@@ -78,10 +73,10 @@ onMounted(async () => {
           <img :src="crypto.image" :alt="crypto.name" width="32" />
           <div class="">
             <div>{{ crypto.name }} ({{ crypto.symbol.toUpperCase() }})</div>
-            <div class="font-bold">${{ crypto.current_price.toFixed(2) }}</div>
+            <div class="font-bold">${{ crypto.current_price }}</div>
           </div>
           <span
-            :class="getPriceChangeClass(crypto.price_change_percentage_24h) > 0 ? 'text-green-400' : 'text-red-400 '">
+            :class="getPriceChangeClass(crypto.price_change_percentage_24h) ? 'text-green-400' : 'text-red-400 '">
             {{ crypto.price_change_percentage_24h.toFixed(2) }}%
           </span>
         </li>
