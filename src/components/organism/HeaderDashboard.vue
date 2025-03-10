@@ -57,8 +57,8 @@ onMounted(async () => {
         id="btn1"
         variant="outlined"
         @click="visibleLeft = true"
-        class="!border-2 !border-[#0b1739] bg-transparent!">
-        <Bitcoin color="black" />
+        class="!border-2 !border-[#FF4C00] bg-transparent!">
+        <Bitcoin color="#FF4C00" />
       </Button>
     </div>
   </header>

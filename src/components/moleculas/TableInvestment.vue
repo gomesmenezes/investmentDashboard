@@ -27,8 +27,7 @@ onMounted(async () => {
           <div class="text-xl font-bold">List of your investments</div>
           <Button
             id="btn"
-            class="h-[44px]"
-            color="black"
+            class="h-[44px] !bg-[#FF4C00] !text-white"
             label="Add Investment"
             @click="visible = true" />
         </div>
@@ -89,14 +88,21 @@ onMounted(async () => {
       <Column style="width: 10rem">
         <template #body>
           <div class="flex flex-wrap gap-2 mx-auto">
-            <Button type="button" icon="pi pi-trash" rounded />
+            <Button
+              type="button"
+              icon="pi pi-trash"
+              class="!bg-[#FF4C00]"
+              rounded />
           </div>
         </template>
       </Column>
 
       <template #footer>
         <div class="flex justify-start">
-          <Button icon="pi pi-refresh" label="Reload" class="border-none" />
+          <Button
+            icon="pi pi-refresh"
+            label="Reload"
+            class="border-none !bg-[#FF4C00]" />
         </div>
       </template>
     </TreeTable>

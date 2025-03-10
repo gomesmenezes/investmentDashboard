@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import BarSide from '@/components/organism/SideBar.vue';
+import NewSideBar from '@/components/NewSideBar.vue';
 </script>
 
 <template>
-  <div class="flex min-h-screen w-full">
-    <BarSide />
-    <section class="px-8 py-5 mx-auto w-screen text-black">
-      <div class="balance ">
-        <h1 class="text-2xl font-bold">Balance</h1>
-        <p class="text-black opacity-50 text-lg">
-          Track and manage your investments across different asset classes
-        </p>
+  <NewSideBar />
+
+  <!-- Conteúdo principal com margem para desktop -->
+  <main class="min-h-screen bg-[#d7d7d7] lg:ml-72">
+    <div class=" p-4 lg:p-6">
+      <!-- Seu conteúdo principal aqui -->
+      <h1 class="text-2xl font-bold">Bem-vindo ao Dashboard</h1>
+      <div class="mt-4">
+        <!-- Adicione seus componentes de conteúdo -->
       </div>
-    </section>
-  </div>
+    </div>
+  </main>
 </template>

@@ -5,13 +5,13 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="min-h-screen min-w-[190px] py-6 px-6 inline-block bg-[#112459]">
-    <nav class="flex justify-between flex-col h-[95%] w-full">
+  <div class="min-h-screen min-w-[190px] py-6 px-6 inline-block bg-[#000000]">
+    <nav class="flex justify-between flex-col h-[95%] w-full !text-white">
       <ul class="flex flex-col gap-2.5">
         <nuxt-link to="/dashboard">
           <li
             class="flex text-lg items-center gap-3 rounded-md p-2"
-            :class="route.path === '/dashboard' ? 'bg-white text-black' : ''">
+            :class="route.path === '/dashboard' ? 'bg-[#FF4C00] text-white' : ''">
             <LayoutDashboard />
             <p>Overview</p>
           </li>
@@ -20,7 +20,7 @@ const route = useRoute();
         <nuxt-link to="/dashboard/investment">
           <li
             class="flex text-lg items-center gap-3 rounded-md p-2"
-            :class="route.path === '/dashboard/investment' ? 'bg-white text-black' : ''">
+            :class="route.path === '/dashboard/investment' ? 'bg-[#FF4C00] text-white' : ''">
             <HandCoins />
             <p>Cripto</p>
           </li>
@@ -29,7 +29,7 @@ const route = useRoute();
         <nuxt-link to="/dashboard/agentInvestment">
           <li
             class="flex text-lg items-center gap-3 rounded-md p-2"
-            :class="route.path === '/dashboard/agentInvestment' ? 'bg-white text-black' : ''">
+            :class="route.path === '/dashboard/agentInvestment' ? 'bg-[#FF4C00] text-white' : ''">
             <ChartCandlestick />
             <p>IA Advisor</p>
           </li>

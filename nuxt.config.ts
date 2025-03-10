@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ['@primevue/nuxt-module'],
+  modules: ['@primevue/nuxt-module', '@element-plus/nuxt'],
   primevue: {
     autoImport: true,
     options: {
