@@ -17,12 +17,12 @@ import {
   Wallet,
   X,
 } from 'lucide-vue-next'
-import { returnPercentage, totalInvested, totalCurrentValue, totalReturn, initStocks } from '@/service/useStock';
-
-const props = defineProps<{ className?: string }>()
+import { returnPercentage, initStocks } from '@/service/useStock';
+import { fetchCrypto } from '@/composobles/useCrypto';
 const isMobile = ref(false)
 const isSidebarOpen = ref(false)
 const activeItem = ref('dashboard')
+const btcPrice = ref<number | null>(null)
 
 const navItems = [
   { icon: Home, label: 'Dashboard', href: '#', id: 'dashboard' },
@@ -48,9 +48,12 @@ const checkIsMobile = () => {
   isMobile.value = window.innerWidth < 1024
 }
 
-onMounted(() => {
+onMounted(async () => {
   checkIsMobile()
   window.addEventListener('resize', checkIsMobile)
+  const data = await fetchCrypto()
+  if (data) btcPrice.value = parseFloat(data.price)
+  initStocks()
 })
 
 onUnmounted(() => {
@@ -80,6 +83,7 @@ const handleNavItemClick = (id: string) => {
         <X class="h-6 w-6" />
       </button>
     </div>
+
     <div class="flex-1 overflow-auto p-3">
       <nav>
         <a
@@ -93,7 +97,19 @@ const handleNavItemClick = (id: string) => {
           <span>{{ item.label }}</span>
         </a>
       </nav>
-      <div class="mt-4 border-t border-gray-700 pt-3">
+      <div class="p-2 my-2 border-t border-b border-gray-700">
+        <div class="flex-1 overflow-auto ">
+          <div class="flex justify-center items-center gap-2">
+            <div>
+              <img src="@/assets/image/btc.webp" alt="btc" class="w-10 h-10" />
+            </div>
+            <span class="text-xl font-bold">
+              {{ btcPrice?.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) || '0.00' }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-2  pt-3">
         <h3 class="px-2 text-xs font-semibold text-gray-500">Ativos</h3>
         <nav>
           <a

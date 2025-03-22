@@ -3,12 +3,20 @@ import NewSideBar from '@/components/NewSideBar.vue';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import { ref, onMounted } from 'vue';
-import { initStocks, returnPercentage, totalCurrentValue, totalInvested } from '@/service/useStock';
-
+import {
+  initStocks,
+  returnPercentage,
+  totalCurrentValue,
+  totalInvested,
+} from '@/service/useStock';
+import { valueInvestedCrypto } from '@/composobles/useCrypto';
 const isDarkMode = ref(false);
+const cryptoValue = ref<number | null>(null);
+import { mockCrypto } from '@/mocks/crypto';
 
 onMounted(async () => {
-  initStocks();  // Inicializa os estoques (caso haja alguma lógica relacionada a estoque)
+  cryptoValue.value = await valueInvestedCrypto();
+  initStocks();
 });
 </script>
 
@@ -43,7 +51,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="mt-4">
-        <div class="cards grid grid-cols-3 gap-4 overflow-hidden">
+        <div class="cards grid grid-cols-4 gap-4 overflow-hidden">
           <Card
             style="width: 100%; overflow: hidden"
             class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
@@ -70,11 +78,31 @@ onMounted(async () => {
             style="width: 100%; overflow: hidden"
             class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
             <template #title>Retorno</template>
+
             <template #content>
               <p
                 class="text-2xl font-bold"
                 :class="returnPercentage > 0 ? 'text-green-500' : 'text-red-500'">
                 {{ Number((returnPercentage).toFixed(2)) }}%
+              </p>
+            </template>
+          </Card>
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
+            <template #title>BITCOIN</template>
+            <template #subtitle>
+              <p class="text-md text-white">
+                Quantidade:
+                <br />
+                <span class="text-white">
+                  {{ mockCrypto[0].quantity }}
+                </span>
+              </p>
+            </template>
+            <template #content>
+              <p class="text-2xl font-bold">
+                $ {{ cryptoValue ? Number(cryptoValue.toFixed(2)) : '0.00' }}
               </p>
             </template>
           </Card>
