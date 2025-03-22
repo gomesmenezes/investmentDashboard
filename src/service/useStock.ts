@@ -27,13 +27,14 @@ export const totalCurrentValue = computed(() => {
 
 // Calcula o retorno total (valor atual - valor investido)
 export const totalReturn = computed(() => {
-  return totalCurrentValue.value - totalInvested.value;
+  return Number((totalCurrentValue.value - totalInvested.value).toFixed(2));
 });
 
 // Calcula a porcentagem de retorno
 export const returnPercentage = computed(() => {
-  if (totalInvested.value === 0) return 0; // Evita divisão por zero
-  return ((totalReturn.value / totalInvested.value) * 100).toFixed(2); // 2 casas decimais
+  if (totalInvested.value === 0) return 0; // Evita divisão por zero.
+  if (totalReturn.value === 0) return 0; // Evita resultados inesperados.
+  return Number(((totalReturn.value / totalInvested.value) * 100).toFixed(2));
 });
 
 export const fetchStockData = async (

@@ -27,7 +27,7 @@ export const mockStocks: Stock[] = [
   {
     id: 2,
     stockName: 'CMIG4',
-    stockQuantity: 3,
+    stockQuantity: 11,
     stockPriceBuy: 11.03,
     stockPriceCurrent: 0,
     stockValuation: 0,
@@ -39,7 +39,7 @@ export const mockStocks: Stock[] = [
   {
     id: 3,
     stockName: 'ITSA4',
-    stockQuantity: 7,
+    stockQuantity: 15,
     stockPriceBuy: 9.48,
     stockPriceCurrent: 0,
     stockValuation: 0,
@@ -51,7 +51,7 @@ export const mockStocks: Stock[] = [
   {
     id: 4,
     stockName: 'BBAS3',
-    stockQuantity: 2,
+    stockQuantity: 3,
     stockPriceBuy: 27.38,
     stockPriceCurrent: 0,
     stockValuation: 0,

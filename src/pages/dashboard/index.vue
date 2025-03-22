@@ -1,80 +1,85 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue';
-import Divider from 'primevue/divider';
-import BarSide from '@/components/organism/SideBar.vue';
-import Card from '@/components/moleculas/Cards/CInvested.vue';
-import CardSeconde from '@/components/moleculas/Cards/CGrowIncome.vue';
-import CardThree from '@/components/moleculas/Cards/CReturnInvestment.vue';
-import HeaderDashboard from '@/components/organism/HeaderDashboard.vue';
-import TableInvestment from '@/components/moleculas/TableInvestment.vue';
-import {
-  stocks,
-  initStocks,
-  totalInvestment,
-  totalReturn,
-  returnPercentage,
-} from '@/service/useStock';
+import NewSideBar from '@/components/NewSideBar.vue';
+import Card from 'primevue/card';
+import Button from 'primevue/button';
+import { ref, onMounted } from 'vue';
+import { initStocks, returnPercentage, totalCurrentValue, totalInvested } from '@/service/useStock';
 
-const hideValueGlobal = ref(true);
-
-const toggleVisibility = () => {
-  hideValueGlobal.value = !hideValueGlobal.value;
-};
+const isDarkMode = ref(false);
 
 onMounted(async () => {
-  await initStocks();
+  initStocks();  // Inicializa os estoques (caso haja alguma lógica relacionada a estoque)
 });
 </script>
 
 <template>
-  <div class="flex min-h-screen w-full !bg-white">
-    <BarSide />
-    <section class="px-8 py-5 mx-auto w-screen">
-      <HeaderDashboard
-        :hideValue="hideValueGlobal"
-        @toggle-visibility="toggleVisibility" />
+  <NewSideBar />
 
-      <Divider />
-
-      <div class="cards mb-5 my-0 grid grid-cols-3 gap-5 w-full">
-        <Card
-          @toggle-visibility="toggleVisibility"
-          :hide-value="hideValueGlobal"
-          title="Total Invested"
-          :total-value="totalInvestment"
-          class="w-full h-[130px]" />
-
-        <CardSeconde
-          :hide-value="hideValueGlobal"
-          @toggle-visibility="toggleVisibility"
-          title="Increase"
-          :percentageOfIncrease="15"
-          description="Grow in since last month"
-          class="w-full h-[130px]" />
-
-        <CardThree
-          @toggle-visibility="toggleVisibility"
-          :hide-value="hideValueGlobal"
-          title="Total Return"
-          :value-return="totalReturn"
-          :porcentage="Number(returnPercentage)"
-          class="w-full h-[130px]" />
+  <main class="min-h-screen bg-[#242424] lg:ml-72">
+    <div class=" p-4 lg:p-6">
+      <div class="topHeader flex justify-between">
+        <h1 class="text-2xl font-bold">Dashboard</h1>
+        <div class="flex gap-4">
+          <Button
+            v-if="isDarkMode === true"
+            icon="pi pi-sun"
+            severity="secondary"
+            rounded
+            aria-label="Sun theme"
+            class="!bg-white" />
+          <Button
+            v-if="isDarkMode === false"
+            icon="pi pi-moon"
+            severity="secondary"
+            rounded
+            aria-label="Moon theme"
+            class="!bg-[#000000]" />
+          <Button
+            class="!bg-[#121212] !text-white"
+            label="Adicionar Investimento" />
+          <Button
+            class="!bg-[#121212] !text-white"
+            label="Remover Investimento" />
+        </div>
       </div>
-
-      <TableInvestment />
-    </section>
-  </div>
+      <div class="mt-4">
+        <div class="cards grid grid-cols-3 gap-4 overflow-hidden">
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
+            <template #title>Valor do Aplicado</template>
+            <template #content>
+              <p class="text-2xl font-bold">
+                R$ {{ Number((totalInvested).toFixed(2)) }}
+              </p>
+            </template>
+          </Card>
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
+            <template #title>Valor Atual</template>
+            <template #content>
+              <p
+                class="text-2xl font-bold"
+                :class="totalCurrentValue > totalInvested ? 'text-green-500' : 'text-red-500'">
+                R$ {{ Number((totalCurrentValue).toFixed(2)) }}
+              </p>
+            </template>
+          </Card>
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
+            <template #title>Retorno</template>
+            <template #content>
+              <p
+                class="text-2xl font-bold"
+                :class="returnPercentage > 0 ? 'text-green-500' : 'text-red-500'">
+                {{ Number((returnPercentage).toFixed(2)) }}%
+              </p>
+            </template>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
-
-<style>
-
-body {
-  background-color: #fff;
-}
-
-#btn {
-  background-color: #0b1739;
-  border: none;
-  color: #fff;
-}
-</style>
