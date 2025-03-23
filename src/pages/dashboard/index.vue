@@ -13,6 +13,8 @@ import { valueInvestedCrypto } from '@/composobles/useCrypto';
 const isDarkMode = ref(false);
 const cryptoValue = ref<number | null>(null);
 import { mockCrypto } from '@/mocks/crypto';
+import TableInvestment from '@/components/moleculas/TableInvestment.vue';
+
 
 onMounted(async () => {
   cryptoValue.value = await valueInvestedCrypto();
@@ -50,12 +52,12 @@ onMounted(async () => {
             label="Remover Investimento" />
         </div>
       </div>
-      <div class="mt-4">
+      <div class="cards mt-4">
         <div class="cards grid grid-cols-4 gap-4 overflow-hidden">
           <Card
             style="width: 100%; overflow: hidden"
-            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
-            <template #title>Valor do Aplicado</template>
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)] flex">
+            <template class="" #title>Valor do Aplicado</template>
             <template #content>
               <p class="text-2xl font-bold">
                 R$ {{ Number((totalInvested).toFixed(2)) }}
@@ -64,7 +66,7 @@ onMounted(async () => {
           </Card>
           <Card
             style="width: 100%; overflow: hidden"
-            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)]">
             <template #title>Valor Atual</template>
             <template #content>
               <p
@@ -76,7 +78,7 @@ onMounted(async () => {
           </Card>
           <Card
             style="width: 100%; overflow: hidden"
-            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)]">
             <template #title>Retorno</template>
 
             <template #content>
@@ -89,12 +91,10 @@ onMounted(async () => {
           </Card>
           <Card
             style="width: 100%; overflow: hidden"
-            class="!bg-[linear-gradient(160deg,_#0093E9_0%,_#80D0C7_100%)]">
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)]">
             <template #title>BITCOIN</template>
             <template #subtitle>
               <p class="text-md text-white">
-                Quantidade:
-                <br />
                 <span class="text-white">
                   {{ mockCrypto[0].quantity }}
                 </span>
@@ -107,6 +107,9 @@ onMounted(async () => {
             </template>
           </Card>
         </div>
+      </div>
+      <div class="mt-4">
+        <TableInvestment />
       </div>
     </div>
   </main>

@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import "primeicons/primeicons.css";
-import TreeTable from 'primevue/treetable';
-import Column from 'primevue/column';
-import { nodes } from '@/mocks/table';
-import { onMounted } from 'vue';
+import TreeTable from "primevue/treetable";
+import Column from "primevue/column";
+import { ref, onMounted } from "vue";
+import { mockStocks } from "@/mocks/stocks"; // Importa os dados das ações
 import { updateStockPrices } from "@/service/useStock";
-import { tagInvestmentOptions } from '@/types/stock';
+import { tagInvestmentOptions } from "@/types/stock";
+import { nodes } from "@/mocks/table";
 
 const visible = ref(false);
+const selectedTag = ref<{ name: string } | null>(null);
 
 onMounted(async () => {
   await updateStockPrices();
@@ -15,12 +17,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="card border-2 border-solid border-[#d7d7d7] rounded-lg p-5">
+  <div>
     <TreeTable
       :value="nodes"
-      tableStyle="min-width: 50rem"
-      class="bg-white text-black"
-      headerClass="bg-white text-black"
+      tableStyle="min-width: 50rem; border-radius: 10px;"
+      class="text-white rounded-lg p-2"
+      headerClass="!bg-transparent text-black"
       footerClass="bg-white text-black">
       <template #header>
         <div class="flex items-center justify-between">

@@ -3,13 +3,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import {
   Activity,
   BarChart3,
-  Bitcoin,
   Building,
-  CreditCard,
-  DollarSign,
   Home,
   LogOut,
-  Menu,
   PieChart,
   Settings,
   Sparkles,
@@ -18,11 +14,14 @@ import {
   X,
 } from 'lucide-vue-next'
 import { returnPercentage, initStocks } from '@/service/useStock';
-import { fetchCrypto } from '@/composobles/useCrypto';
+import { fetchCrypto, cryptoPercentageChange } from '@/composobles/useCrypto';
 const isMobile = ref(false)
 const isSidebarOpen = ref(false)
 const activeItem = ref('dashboard')
 const btcPrice = ref<number | null>(null)
+const cryptoPercentage = ref<number | null>(null)
+const cryptoPercentageDay = ref<number | null>(null)
+let updateInterval: number | null = null
 
 const navItems = [
   { icon: Home, label: 'Dashboard', href: '#', id: 'dashboard' },
@@ -37,27 +36,36 @@ const secondaryNavItems = [
   { icon: User, label: 'Perfil', href: '#', id: 'profile' },
 ]
 
-const assetItems = [
-  { icon: Building, label: 'Ações', href: '#', id: 'stocks', badge: `${returnPercentage.value}%` },
-  { icon: CreditCard, label: 'Renda Fixa', href: '#', id: 'bonds', badge: '+12.1%' },
-  { icon: Bitcoin, label: 'Criptomoedas', href: '#', id: 'crypto', badge: '-5.2%' },
-  { icon: DollarSign, label: 'Reserva', href: '#', id: 'emergency', badge: '+10.2%' },
-]
+const assetItems = computed(() => [
+  {
+    icon: Building,
+    label: 'Ações',
+    href: '#',
+    id: 'stocks',
+    badge: `${returnPercentage.value}%`
+  },
+])
 
-const checkIsMobile = () => {
-  isMobile.value = window.innerWidth < 1024
+const updateCryptoData = async () => {
+  const data = await fetchCrypto()
+  if (data) {
+    btcPrice.value = parseFloat(data.lastPrice)
+    cryptoPercentage.value = parseFloat(data.priceChangePercent)
+  }
 }
 
 onMounted(async () => {
-  checkIsMobile()
-  window.addEventListener('resize', checkIsMobile)
-  const data = await fetchCrypto()
-  if (data) btcPrice.value = parseFloat(data.price)
+  cryptoPercentageDay.value = await cryptoPercentageChange()
+  await updateCryptoData()
+
+  updateInterval = window.setInterval(updateCryptoData, 15 * 1000)
   initStocks()
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkIsMobile)
+  if (updateInterval) {
+    clearInterval(updateInterval)
+  }
 })
 
 const handleNavItemClick = (id: string) => {
@@ -106,6 +114,11 @@ const handleNavItemClick = (id: string) => {
             <span class="text-xl font-bold">
               {{ btcPrice?.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) || '0.00' }}
             </span>
+            <span
+              class="text-lg font-semibold"
+              :class="(cryptoPercentage ?? 0) > 0 ? 'text-green-400' : 'text-red-400'">
+              {{ cryptoPercentage?.toFixed(2) ?? 0 }}%
+            </span>
           </div>
         </div>
       </div>
@@ -122,7 +135,8 @@ const handleNavItemClick = (id: string) => {
             <component :is="item.icon" class="h-5 w-5" />
             <span>{{ item.label }}</span>
             <span
-              class="ml-auto text-xs font-semibold text-green-400"
+              :class="item.badge.includes('-') ? 'text-red-400' : 'text-green-400'"
+              class="ml-auto text-xs font-semibold"
               v-if="item.badge">
               {{ item.badge }}
             </span>
