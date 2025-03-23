@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="bg-[#0B1739] px-8 py-5 rounded-2xl max-h-[160px] flex justify-center items-center"
+    class="bg-[#FF4C00] !text-white px-8 py-5 rounded-2xl max-h-[160px] flex justify-center items-center"
     :style="{ 
       width: typeof props.width === 'number' ? `${props.width}px` : props.width,
       height: typeof props.height === 'number' ? `${props.height}px` : props.height

@@ -1,22 +1,54 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import "primeicons/primeicons.css";
-import TreeTable from 'primevue/treetable';
-import Column from 'primevue/column';
-import { nodes } from '@/mocks/table';
+import TreeTable from "primevue/treetable";
+import Column from "primevue/column";
+import { ref, onMounted } from "vue";
+import { mockStocks } from "@/mocks/stocks"; // Importa os dados das ações
+import { updateStockPrices } from "@/service/useStock";
+import { tagInvestmentOptions } from "@/types/stock";
+import { nodes } from "@/mocks/table";
+
+const visible = ref(false);
+const selectedTag = ref<{ name: string } | null>(null);
+
+onMounted(async () => {
+  await updateStockPrices();
+});
 </script>
 
 <template>
-  <div class="card border-2 border-solid border-[#d7d7d7] rounded-lg p-5">
+  <div>
     <TreeTable
       :value="nodes"
-      tableStyle="min-width: 50rem"
-      class="bg-white text-black"
-      headerClass="bg-white text-black"
+      tableStyle="min-width: 50rem; border-radius: 10px;"
+      class="text-white rounded-lg p-2"
+      headerClass="!bg-transparent text-black"
       footerClass="bg-white text-black">
       <template #header>
-        <div class="text-xl font-bold">List of your investments</div>
+        <div class="flex items-center justify-between">
+          <div class="text-xl font-bold">List of your investments</div>
+          <Button
+            id="btn"
+            class="h-[44px] !bg-[#FF4C00] !text-white"
+            label="Add Investment"
+            @click="visible = true" />
+        </div>
       </template>
+
+      <Column
+        field="logoUrlStock"
+        header=""
+        style="width: 150px"
+        headerStyle="background-color: white; color: black;">
+        <template #body="{ node }">
+          <img
+            v-if="node.data.logoUrlStock"
+            :src="node.data.logoUrlStock"
+            alt="Logo"
+            class="h-8 w-8 object-contain" />
+          <div v-else class="h-8 w-8 bg-gray-200"></div>
+        </template>
+      </Column>
 
       <Column
         field="stockName"
@@ -32,8 +64,8 @@ import { nodes } from '@/mocks/table';
         headerStyle="background-color: white; color: black;"></Column>
 
       <Column
-        field="amount"
-        header="Amount"
+        field="quantity"
+        header="Quantity"
         style="width: 150px"
         headerStyle="background-color: white; color: black;"></Column>
 
@@ -57,24 +89,87 @@ import { nodes } from '@/mocks/table';
 
       <Column style="width: 10rem">
         <template #body>
-          <div class="flex flex-wrap gap-2">
-            <Button type="button" icon="pi pi-search" rounded />
+          <div class="flex flex-wrap gap-2 mx-auto">
             <Button
               type="button"
-              icon="pi pi-pencil"
-              rounded
-              severity="success" />
+              icon="pi pi-trash"
+              class="!bg-[#FF4C00]"
+              rounded />
           </div>
         </template>
       </Column>
 
       <template #footer>
         <div class="flex justify-start">
-          <Button icon="pi pi-refresh" label="Reload" class="border-none" />
+          <Button
+            icon="pi pi-refresh"
+            label="Reload"
+            class="border-none !bg-[#FF4C00]" />
         </div>
       </template>
     </TreeTable>
   </div>
+
+  <!-- Dialog -->
+  <Dialog
+    v-model:visible="visible"
+    modal
+    header="Add Investment"
+    :style="{ width: '25rem' }">
+    <span class="text-surface-500 dark:text-surface-400 block mb-8">
+      Add your investment
+    </span>
+
+    <div class="flex items-center gap-4 mb-4">
+      <label for="stockId" class="font-semibold w-24">Stock ID</label>
+      <InputText
+        id="stockId"
+        class="flex-auto"
+        autocomplete="off"
+        placeholder="Ex: PETR4" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-4">
+      <label for="quantityStock" class="font-semibold w-24">Quantity</label>
+      <InputNumber
+        id="quantityStock"
+        class="flex-auto"
+        autocomplete="off"
+        placeholder="100" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-4">
+      <label for="purchasePrice" class="font-semibold w-24">
+        Purchase Price
+      </label>
+      <InputNumber
+        id="purchasePrice"
+        class="flex-auto"
+        autocomplete="off"
+        placeholder="37.57" />
+    </div>
+
+    <div class="flex items-center gap-4 mb-4">
+      <label for="ms_tagInvestment" class="font-semibold min-w-24!">
+        Category
+      </label>
+      <Select
+        v-model="selectedTag"
+        :options="tagInvestmentOptions"
+        optionLabel="name"
+        placeholder="Select a Tag"
+        class="w-full" />
+    </div>
+
+    <div class="flex justify-end gap-2 mt-4">
+      <Button
+        type="button"
+        label="Cancelar"
+        severity="secondary"
+        @click="visible = false" />
+      <Button type="button" label="Adicionar" @click="visible = false" />
+    </div>
+  </Dialog>
 </template>
 
 <style>

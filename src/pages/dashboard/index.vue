@@ -1,122 +1,116 @@
-<script setup>
+<script setup lang="ts">
+import NewSideBar from '@/components/NewSideBar.vue';
+import Card from 'primevue/card';
+import Button from 'primevue/button';
 import { ref, onMounted } from 'vue';
-import Chart from 'primevue/chart';
-import BarSide from '@/components/organism/SideBar.vue';
-import Card from '@/components/moleculas/Cards/CInvested.vue';
-import CardSeconde from '@/components/moleculas/Cards/CGrowIncome.vue';
-import Assets from '@/components/moleculas/Assets.vue';
-import cryptoCard from '@/components/moleculas/cryptoCard.vue';
+import {
+  initStocks,
+  returnPercentage,
+  totalCurrentValue,
+  totalInvested,
+} from '@/service/useStock';
+import { valueInvestedCrypto } from '@/composobles/useCrypto';
+const isDarkMode = ref(false);
+const cryptoValue = ref<number | null>(null);
+import { mockCrypto } from '@/mocks/crypto';
+import TableInvestment from '@/components/moleculas/TableInvestment.vue';
 
-// Dados de investimento para dois meses
-const investValueLastMonth = [1500, 300, 100]; // Reserva, Ações, Criptomoedas (mês anterior)
-const investValueCurrentMonth = [1827.07, 350, 150]; // Reserva, Ações, Criptomoedas (mês atual)
 
-const totalInvestValue = investValueCurrentMonth.reduce((acc, val) => acc + val, 0);
-
-const chartData = ref();
-const chartOptions = ref();
-
-onMounted(() => {
-  chartData.value = setChartData();
-  chartOptions.value = setChartOptions();
+onMounted(async () => {
+  cryptoValue.value = await valueInvestedCrypto();
+  initStocks();
 });
-
-const setChartData = () => {
-  const documentStyle = getComputedStyle(document.documentElement);
-
-  return {
-    labels: ['Mês Anterior', 'Mês Atual'], // Rótulos dos meses
-    datasets: [
-      {
-        label: 'Reserva de Emergência', // Categoria 1
-        backgroundColor: documentStyle.getPropertyValue('--p-cyan-500'), // Cor da categoria
-        data: [investValueLastMonth[0], investValueCurrentMonth[0]], // Valores para cada mês
-      },
-      {
-        label: 'Ações', // Categoria 2
-        backgroundColor: documentStyle.getPropertyValue('--p-gray-500'), // Cor da categoria
-        data: [investValueLastMonth[1], investValueCurrentMonth[1]], // Valores para cada mês
-      },
-      {
-        label: 'Criptomoedas', // Categoria 3
-        backgroundColor: documentStyle.getPropertyValue('--p-orange-500'), // Cor da categoria
-        data: [investValueLastMonth[2], investValueCurrentMonth[2]], // Valores para cada mês
-      },
-    ],
-  };
-};
-
-const setChartOptions = () => {
-  const documentStyle = getComputedStyle(document.documentElement);
-  const textColor = documentStyle.getPropertyValue('--p-text-color');
-  const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
-  const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
-
-  return {
-    maintainAspectRatio: false,
-    aspectRatio: 0.8,
-    plugins: {
-      tooltips: {
-        mode: 'index',
-        intersect: false,
-      },
-      legend: {
-        position: 'bottom',
-        labels: {
-          color: textColor,
-        },
-      },
-    },
-    scales: {
-      x: {
-        stacked: true, // Barras empilhadas no eixo X
-        ticks: {
-          color: textColorSecondary,
-        },
-        grid: {
-          color: surfaceBorder,
-        },
-      },
-      y: {
-        stacked: true, // Barras empilhadas no eixo Y
-        ticks: {
-          color: textColorSecondary,
-        },
-        grid: {
-          color: surfaceBorder,
-        },
-      },
-    },
-  };
-};
 </script>
 
 <template>
-  <div class="flex items-start">
-    <BarSide />
-    <div class="grid grid-cols-2 gap-5 pt-8 px-5 w-fit h-auto self-start">
-      <div class="gap-5 pl-5">
-        <div class="mb-10 flex gap-5">
-          <Card :totalValue="totalInvestValue" />
-          <CardSeconde
-            title="Increase"
-            :percetageOfIncrease="15"
-            description="Grow in since last month" />
-        </div>
-        <div class="w-full">
-          <Chart
-            type="bar"
-            :data="chartData"
-            :options="chartOptions"
-            class="h-[25rem]" />
+  <NewSideBar />
+
+  <main class="min-h-screen bg-[#242424] lg:ml-72">
+    <div class=" p-4 lg:p-6">
+      <div class="topHeader flex justify-between">
+        <h1 class="text-2xl font-bold">Dashboard</h1>
+        <div class="flex gap-4">
+          <Button
+            v-if="isDarkMode === true"
+            icon="pi pi-sun"
+            severity="secondary"
+            rounded
+            aria-label="Sun theme"
+            class="!bg-white" />
+          <Button
+            v-if="isDarkMode === false"
+            icon="pi pi-moon"
+            severity="secondary"
+            rounded
+            aria-label="Moon theme"
+            class="!bg-[#000000]" />
+          <Button
+            class="!bg-[#121212] !text-white"
+            label="Adicionar Investimento" />
+          <Button
+            class="!bg-[#121212] !text-white"
+            label="Remover Investimento" />
         </div>
       </div>
-      <div>
-        <div class="flex justify-center items-center mx-auto mb-5">
-          <cryptoCard />
+      <div class="cards mt-4">
+        <div class="cards grid grid-cols-4 gap-4 overflow-hidden">
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)] flex">
+            <template class="" #title>Valor do Aplicado</template>
+            <template #content>
+              <p class="text-2xl font-bold">
+                R$ {{ Number((totalInvested).toFixed(2)) }}
+              </p>
+            </template>
+          </Card>
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)]">
+            <template #title>Valor Atual</template>
+            <template #content>
+              <p
+                class="text-2xl font-bold"
+                :class="totalCurrentValue > totalInvested ? 'text-green-500' : 'text-red-500'">
+                R$ {{ Number((totalCurrentValue).toFixed(2)) }}
+              </p>
+            </template>
+          </Card>
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)]">
+            <template #title>Retorno</template>
+
+            <template #content>
+              <p
+                class="text-2xl font-bold"
+                :class="returnPercentage > 0 ? 'text-green-500' : 'text-red-500'">
+                {{ Number((returnPercentage).toFixed(2)) }}%
+              </p>
+            </template>
+          </Card>
+          <Card
+            style="width: 100%; overflow: hidden"
+            class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)]">
+            <template #title>BITCOIN</template>
+            <template #subtitle>
+              <p class="text-md text-white">
+                <span class="text-white">
+                  {{ mockCrypto[0].quantity }}
+                </span>
+              </p>
+            </template>
+            <template #content>
+              <p class="text-2xl font-bold">
+                $ {{ cryptoValue ? Number(cryptoValue.toFixed(2)) : '0.00' }}
+              </p>
+            </template>
+          </Card>
         </div>
-        <Assets />
+      </div>
+      <div class="mt-4">
+        <TableInvestment />
       </div>
     </div>
-  </div>
+  </main>
 </template>

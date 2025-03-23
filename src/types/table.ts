@@ -8,9 +8,10 @@ export type Category =
 export interface TreeNode {
   key: string;
   data: {
+    logoUrlStock: string;
     stockName: string;
-    type: Category;
-    amount: number;
+    type: string;
+    quantity: number;
     currentValue: number;
     purchasePrice: number;
     date: string;

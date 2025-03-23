@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { Eye, EyeOff } from 'lucide-vue-next';
 import { withDefaults } from 'vue'
+import {
+  stocks,
+  initStocks,
+  totalInvestment,
+  totalReturn,
+  returnPercentage,
+  totalCurrentValue
+} from '@/service/useStock';
 
 interface Props {
   title: string;
@@ -31,7 +39,7 @@ function toggleMoney() {
       width: typeof props.width === 'number' ? `${props.width}px` : props.width,
       minHeight: typeof props.height === 'number' ? `${props.height}px` : props.height
     }"
-    class="bg-[#0B1739] px-8 py-5 rounded-2xl flex flex-col my-auto justify-center">
+    class="bg-[#FF4C00] !text-white px-8 py-5 rounded-2xl flex flex-col my-auto justify-center">
     <div class="flex items-center justify-between mb-4 ">
       <div class="flex items-center gap-3">
         <button
@@ -49,7 +57,10 @@ function toggleMoney() {
       <span class="text-2xl font-bold">{{ currency }}</span>
       <div class="text-3xl font-bold">
         <template v-if="!hideValue">
-          {{ totalValue.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
+          <span
+            :class="totalCurrentValue > totalInvestment ? 'text-green-500' : 'text-red-500'">
+            {{ totalValue.toLocaleString('pt-BR', { style: 'decimal', minimumFractionDigits: 2 }) }}
+          </span>
         </template>
         <template v-else>
           <span class="tracking-widest">•••••</span>
