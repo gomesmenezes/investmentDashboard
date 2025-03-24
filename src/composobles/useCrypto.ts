@@ -1,5 +1,7 @@
 import { mockCrypto } from '@/mocks/crypto.js';
 
+let updateInterval: number | null = null;
+
 export const fetchCrypto = async () => {
   try {
     const response = await fetch(
@@ -17,8 +19,6 @@ export const valueInvestedCrypto = async () => {
   let currentValue: number | null = null;
 
   const cryptoData = await fetchCrypto();
-  setInterval(valueInvestedCrypto, 15000);
-
   if (cryptoData) {
     currentValue = mockCrypto[0].quantity * parseFloat(cryptoData.lastPrice);
   }
@@ -31,4 +31,18 @@ export const cryptoPercentageChange = async () => {
     return parseFloat(cryptoData.priceChangePercent);
   }
   return null;
+};
+
+export const startCryptoUpdates = (callback: () => void) => {
+  if (updateInterval) {
+    clearInterval(updateInterval);
+  }
+  updateInterval = window.setInterval(callback, 15000);
+};
+
+export const stopCryptoUpdates = () => {
+  if (updateInterval) {
+    clearInterval(updateInterval);
+    updateInterval = null;
+  }
 };

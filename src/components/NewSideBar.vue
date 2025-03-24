@@ -14,7 +14,7 @@ import {
   X,
 } from 'lucide-vue-next'
 import { returnPercentage, initStocks } from '@/service/useStock';
-import { fetchCrypto, cryptoPercentageChange } from '@/composobles/useCrypto';
+import { fetchCrypto, cryptoPercentageChange, startCryptoUpdates, stopCryptoUpdates } from '@/composobles/useCrypto';
 const isMobile = ref(false)
 const isSidebarOpen = ref(false)
 const activeItem = ref('dashboard')
@@ -57,15 +57,12 @@ const updateCryptoData = async () => {
 onMounted(async () => {
   cryptoPercentageDay.value = await cryptoPercentageChange()
   await updateCryptoData()
-
-  updateInterval = window.setInterval(updateCryptoData, 15 * 1000)
+  startCryptoUpdates(updateCryptoData)
   initStocks()
 })
 
 onUnmounted(() => {
-  if (updateInterval) {
-    clearInterval(updateInterval)
-  }
+  stopCryptoUpdates()
 })
 
 const handleNavItemClick = (id: string) => {

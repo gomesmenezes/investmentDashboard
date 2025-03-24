@@ -175,35 +175,35 @@ onMounted(async () => {
 <style>
 /* Estilos globais da tabela */
 .p-treetable {
-  background: white !important;
-  color: black !important;
+  background: black !important;
+  color: white !important;
 }
 
 /* Header */
 .p-treetable .p-treetable-header {
-  background: white !important;
-  color: black !important;
+  background: black !important;
+  color: white !important;
   border-bottom: 1px solid #e5e7eb !important;
 }
 
 /* Footer */
 .p-treetable .p-treetable-footer {
-  background: white !important;
-  color: black !important;
+  background: black !important;
+  color: white !important;
   border-top: 1px solid #e5e7eb !important;
 }
 
 /* Cabeçalho das colunas */
 .p-treetable-thead > tr > th {
-  background: white !important;
-  color: black !important;
+  background: black !important;
+  color: white !important;
   border-color: #e5e7eb !important;
 }
 
 /* Linhas e células */
 .p-treetable-tbody > tr > td {
-  background: white !important;
-  color: black !important;
+  background: black !important;
+  color: white !important;
   border-color: #e5e7eb !important;
 }
 

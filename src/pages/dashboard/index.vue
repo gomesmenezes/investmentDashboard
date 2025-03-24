@@ -14,11 +14,14 @@ const isDarkMode = ref(false);
 const cryptoValue = ref<number | null>(null);
 import { mockCrypto } from '@/mocks/crypto';
 import TableInvestment from '@/components/moleculas/TableInvestment.vue';
-
+import ChartPizza from '@/components/moleculas/ChartPizza.vue';
+import { fetchDolar } from '@/composobles/useCurrency';
 
 onMounted(async () => {
   cryptoValue.value = await valueInvestedCrypto();
   initStocks();
+  const dolar = await fetchDolar();
+  console.log(dolar);
 });
 </script>
 
@@ -79,7 +82,7 @@ onMounted(async () => {
           <Card
             style="width: 100%; overflow: hidden"
             class="!bg-[linear-gradient(160deg,_#000428_35%,_#004e92_100%)]">
-            <template #title>Retorno</template>
+            <template #title>Retorno da Carteira</template>
 
             <template #content>
               <p
@@ -109,6 +112,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="mt-4">
+        <ChartPizza />
         <TableInvestment />
       </div>
     </div>
